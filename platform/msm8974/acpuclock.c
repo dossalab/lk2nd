@@ -211,7 +211,7 @@ void clock_config_uart_dm(uint8_t id)
 	switch (id) {
 	case 0:
 		parent_clock = "uart1_iface_clk";
-		uart_clock = "uart2_core_clk";
+		uart_clock = "uart1_core_clk";
 		break;
 	case 1:
 		parent_clock = "uart2_iface_clk";
