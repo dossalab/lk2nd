@@ -191,14 +191,20 @@
 #define SDCC3_D                     (CLK_CTL_BASE + 0x560) /* d */
 
 /* UART */
+#define BLSP_UART_APPS_CBCR(x)      ((x) + 0x00)
+#define BLSP_UART_APPS_CMD_RCGR(x)  ((x) + 0x08)
+#define BLSP_UART_APPS_CFG_RCGR(x)  ((x) + 0x0C)
+#define BLSP_UART_APPS_M(x)         ((x) + 0x10)
+#define BLSP_UART_APPS_N(x)         ((x) + 0x14)
+#define BLSP_UART_APPS_D(x)         ((x) + 0x18)
+
 #define BLSP1_AHB_CBCR              (CLK_CTL_BASE + 0x5C4)
+#define BLSP1_UART1_APPS_BASE       (CLK_CTL_BASE + 0x684)
+#define BLSP1_UART2_APPS_BASE       (CLK_CTL_BASE + 0x704)
+
 #define BLSP2_AHB_CBCR              (CLK_CTL_BASE + 0x944)
-#define BLSP1_UART2_APPS_CBCR       (CLK_CTL_BASE + 0x704)
-#define BLSP1_UART2_APPS_CMD_RCGR   (CLK_CTL_BASE + 0x70C)
-#define BLSP1_UART2_APPS_CFG_RCGR   (CLK_CTL_BASE + 0x710)
-#define BLSP1_UART2_APPS_M          (CLK_CTL_BASE + 0x714)
-#define BLSP1_UART2_APPS_N          (CLK_CTL_BASE + 0x718)
-#define BLSP1_UART2_APPS_D          (CLK_CTL_BASE + 0x71C)
+#define BLSP2_UART1_APPS_CLK        (CLK_CTL_BASE + 0x9c4)
+#define BLSP2_UART2_APPS_CLK        (CLK_CTL_BASE + 0xa44)
 
 /* USB */
 #define USB_HS_SYSTEM_CBCR          (CLK_CTL_BASE + 0x484)
