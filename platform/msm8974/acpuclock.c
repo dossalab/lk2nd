@@ -206,19 +206,33 @@ void clock_config_cdc(uint32_t interface)
 void clock_config_uart_dm(uint8_t id)
 {
 	int ret;
+	const char *parent_clock, *uart_clock;
 
+	switch (id) {
+	case 0:
+		parent_clock = "uart1_iface_clk";
+		uart_clock = "uart2_core_clk";
+		break;
+	case 1:
+		parent_clock = "uart2_iface_clk";
+		uart_clock = "uart2_core_clk";
+		break;
+	default:
+		dprintf(CRITICAL, "unable to configure clocks for UART (instance %d)", id);
+		return;
+	}
 
-    ret = clk_get_set_enable("uart2_iface_clk", 0, 1);
-    if(ret)
+	ret = clk_get_set_enable(parent_clock, 0, 1);
+	if (ret)
 	{
-		dprintf(CRITICAL, "failed to set uart2_iface_clk ret = %d\n", ret);
+		dprintf(CRITICAL, "failed to set %s ret = %d\n", parent_clock, ret);
 		ASSERT(0);
 	}
 
-    ret = clk_get_set_enable("uart2_core_clk", 7372800, 1);
-	if(ret)
+	ret = clk_get_set_enable(uart_clock, 7372800, 1);
+	if (ret)
 	{
-		dprintf(CRITICAL, "failed to set uart1_core_clk ret = %d\n", ret);
+		dprintf(CRITICAL, "failed to set %s ret = %d\n", uart_clock, ret);
 		ASSERT(0);
 	}
 }

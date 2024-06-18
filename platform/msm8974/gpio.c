@@ -52,15 +52,26 @@ void gpio_set(uint32_t gpio, uint32_t dir)
 	return;
 }
 
-/* Configure gpio for blsp uart 2 */
+/* Configure gpio for given uart instance */
 void gpio_config_uart_dm(uint8_t id)
 {
-    /* configure rx gpio */
-	gpio_tlmm_config(5, 2, GPIO_INPUT, GPIO_NO_PULL,
-				GPIO_8MA, GPIO_DISABLE);
+	int rx_pin, tx_pin;
 
-    /* configure tx gpio */
-	gpio_tlmm_config(4, 2, GPIO_OUTPUT, GPIO_NO_PULL,
+	switch (id) {
+	case 0:
+		tx_pin = 0, rx_pin = 1;
+		break;
+	case 1:
+		tx_pin = 4, rx_pin = 5;
+		break;
+	default:
+		dprintf(CRITICAL, "unable to configure UART gpio (instance %d)\n", id);
+		return;
+	}
+
+	gpio_tlmm_config(rx_pin, 2, GPIO_INPUT, GPIO_NO_PULL,
+				GPIO_8MA, GPIO_DISABLE);
+	gpio_tlmm_config(tx_pin, 2, GPIO_OUTPUT, GPIO_NO_PULL,
 				GPIO_8MA, GPIO_DISABLE);
 }
 
